@@ -84,7 +84,7 @@ public class C0116261 extends Robot {
         this.setBulletColor(new Color(220, 244, 255));
         idou(100, 100);
         while (true) {
-            this.setScanColor(new Color((int)getHeading()-105, (int)(Math.random()*255), (int)(Math.random()*255)));
+            this.setScanColor(new Color(Math.abs((int)getHeading()-105), (int)(Math.random()*255), (int)(Math.random()*255)));
             turnGunRight(360);
             
         }
