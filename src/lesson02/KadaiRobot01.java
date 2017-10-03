@@ -7,7 +7,6 @@ package lesson02;
 
 import robocode.Robot;
 import robocode.ScannedRobotEvent;
-import preset.pri;
 
 /**
  *
@@ -41,7 +40,6 @@ public class KadaiRobot01 extends Robot {
         turnLeft(90);
         ahead(getX()-(getBattleFieldWidth()-18)/2);
         
-        preset.pri.idou(18, 18);
         
 
     }

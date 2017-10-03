@@ -41,7 +41,7 @@ public class KadaiRobot03 extends Robot {
         ahead((getBattleFieldHeight() - 18) - getY());
         turnLeft(90);
         ahead(getX() - (getBattleFieldWidth() - 18));
-
+        
         while (true) {
             turnGunLeft(90);
             turnGunRight(90);
