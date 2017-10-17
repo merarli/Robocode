@@ -61,8 +61,8 @@ public class hatten extends Robot {
         System.out.println("敵の名前" + event.getName());
         System.out.println("敵の弾のパワー" + event.getBullet());
         System.out.println("たまの飛んできた方向"+event.getHeading());
-        turnRight(event.getHeading()-getHeading()-180);
-        turnRight(90);
+        turnRight(event.getHeading()-getHeading()-90);
+//        turnRight(90);
         System.out.println("実機のボディ方向"+getHeading());
         System.out.println("---");
 
