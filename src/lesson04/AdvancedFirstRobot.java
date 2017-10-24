@@ -14,7 +14,7 @@ import robocode.ScannedRobotEvent;
  *
  * @author merarli
  */
-public class MyFirstRobot extends Robot {
+public class AdvancedFirstRobot extends Robot {
 
     @Override
     public void onScannedRobot(ScannedRobotEvent event) {
