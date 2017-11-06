@@ -19,6 +19,7 @@ import robocode.AdvancedRobot;
 import robocode.MoveCompleteCondition;
 import robocode.ScannedRobotEvent;
 import robocode.TurnCompleteCondition;
+import robocode.WinEvent;
 import robocode.util.Utils;
 
 /**
@@ -28,8 +29,6 @@ import robocode.util.Utils;
 public class C0116261 extends AdvancedRobot {
 
     public int count = 0;
-    boolean peek; // Don't turn if there's a robot there
-    double moveAmount; // How much to move
     double bgS = 0;
     double rbS = 0;
     double hMax = 0;
@@ -38,6 +37,13 @@ public class C0116261 extends AdvancedRobot {
 
     @Override
     public void run() {
+
+        this.setRadarColor(Color.GRAY);
+        this.setBodyColor(new Color(114, 160, 255));
+        this.setGunColor(new Color(254, 64, 216));
+        this.setBulletColor(new Color(220, 244, 255));
+
+//        nanoru();
 
         System.out.println("ボーダーガードサイズは：　" + getSentryBorderSize());
         bgS = getSentryBorderSize();
@@ -53,9 +59,25 @@ public class C0116261 extends AdvancedRobot {
             idou(wMax, getBattleFieldHeight() - hMax);
             idou(getBattleFieldWidth() - wMax, getBattleFieldHeight() - hMax);
             idou(getBattleFieldWidth() - wMax, hMax);
+            
+            //もしロボットの残り数が１になったら名乗るモードにはいる
+            if(getOthers()==1){
+                break;
+            }
 
         }
+        
+        nanoru();
+        
+        while (true) {
 
+            idou(wMax, hMax);
+            idou(wMax, getBattleFieldHeight() - hMax);
+            idou(getBattleFieldWidth() - wMax, getBattleFieldHeight() - hMax);
+            idou(getBattleFieldWidth() - wMax, hMax);
+        }
+        
+        
     }
 
     @Override
@@ -65,7 +87,7 @@ public class C0116261 extends AdvancedRobot {
         double distanceLevel2 = 200;
         double distanceLevel3 = 300;
         double distanceLevel4 = 400;
-        
+
         String name = event.getName();
         System.out.println(event.getName());
 
@@ -107,7 +129,7 @@ public class C0116261 extends AdvancedRobot {
 
         if (turn == true) {
             setAhead(y - getY());
-            setTurnGunLeft(360 * 3);
+            setTurnGunLeft(getBattleFieldWidth() * 1.7);
             waitFor(new MoveCompleteCondition(this));
 //            waitFor(new TurnCompleteCondition(this));
             turn = false;
@@ -120,7 +142,7 @@ public class C0116261 extends AdvancedRobot {
 
         if (turn == true) {
             setAhead(getX() - x);
-            setTurnGunLeft(360 * 3);
+            setTurnGunLeft(getBattleFieldHeight() * 1.7);
             waitFor(new MoveCompleteCondition(this));
 //            waitFor(new TurnCompleteCondition(this));
             turn = false;
@@ -128,6 +150,47 @@ public class C0116261 extends AdvancedRobot {
 
         execute();
 
+    }
+
+    @Override
+    public void onWin(WinEvent event) {
+        setGunColor(Color.WHITE);
+        idou(100, 500);
+    }
+
+    public void nanoru() {
+        //mを描く
+        idou(getBattleFieldWidth() / 4, getBattleFieldHeight() / 2);
+        idou(getBattleFieldWidth() / 4, getBattleFieldHeight() / 2 + 100);
+        idou(getBattleFieldWidth() / 4 + 25, getBattleFieldHeight() / 2 + 100);
+        idou(getBattleFieldWidth() / 4 + 25, getBattleFieldHeight() / 2 + 0);
+        idou(getBattleFieldWidth() / 4 + 50, getBattleFieldHeight() / 2 + 0);
+        idou(getBattleFieldWidth() / 4 + 50, getBattleFieldHeight() / 2 + 100);
+        idou(getBattleFieldWidth() / 4 + 75, getBattleFieldHeight() / 2 + 100);
+        idou(getBattleFieldWidth() / 4 + 75, getBattleFieldHeight() / 2 + 0);
+        //mを描く
+
+        //eを描く
+        idou(getBattleFieldWidth() / 4 + 100, getBattleFieldHeight() / 2 + 0);
+        idou(getBattleFieldWidth() / 4 + 100, getBattleFieldHeight() / 2 + 50);
+        idou(getBattleFieldWidth() / 4 + 75, getBattleFieldHeight() / 2 + 50);
+        idou(getBattleFieldWidth() / 4 + 75, getBattleFieldHeight() / 2 - 100);
+        idou(getBattleFieldWidth() / 4 + 125, getBattleFieldHeight() / 2 + -100);
+        //eを描く
+        
+        //rを描く
+        idou(getBattleFieldWidth() / 4 + 125, getBattleFieldHeight() / 2 + 100);
+        idou(getBattleFieldWidth() / 4 + 175, getBattleFieldHeight() / 2 + 100);
+        //rを描く
+        
+        //aを描く
+        idou(getBattleFieldWidth() / 4 + 175, getBattleFieldHeight() / 2 + -100);
+        idou(getBattleFieldWidth() / 4 + 225, getBattleFieldHeight() / 2 + -100);
+        idou(getBattleFieldWidth() / 4 + 225, getBattleFieldHeight() / 2 + 50);
+        idou(getBattleFieldWidth() / 4 + 175, getBattleFieldHeight() / 2 + 50);
+        idou(getBattleFieldWidth() / 4 + 175, getBattleFieldHeight() / 2 - 100);
+        idou(getBattleFieldWidth() / 4 + 250, getBattleFieldHeight() / 2 + -100);
+        //aを描く
     }
 
 }
